@@ -80,11 +80,7 @@ Update all listeners of `observable`.
 function Base.notify(observable::AbstractObservable)
     val = observable[]
     for f in listeners(observable)
-        if f isa InternalFunction
-            f(val)
-        else
-            Base.invokelatest(f, val)
-        end
+        Base.invokelatest(f, val)
     end
     return
 end
